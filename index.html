@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spam Email Detector</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .spam {
+      color: red;
+    }
+
+    .ham {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>📧 Spam Email Detector</h2>
+
+    <textarea id="text" placeholder="Enter message here..."></textarea>
+
+    <br>
+    <button onclick="checkSpam()">Check</button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    // Simple spam keywords
+    const spamWords = [
+      "free", "win", "winner", "cash", "prize",
+      "urgent", "lottery", "click", "offer", "money"
+    ];
+
+    function checkSpam() {
+      let text = document.getElementById("text").value.toLowerCase();
+      let result = document.getElementById("result");
+
+      let spamScore = 0;
+
+      spamWords.forEach(word => {
+        if (text.includes(word)) {
+          spamScore++;
+        }
+      });
+
+      if (spamScore > 1) {
+        result.innerHTML = "🚨 SPAM MESSAGE";
+        result.className = "result spam";
+      } else {
+        result.innerHTML = "✅ NOT SPAM (HAM)";
+        result.className = "result ham";
+      }
+    }
+  </script>
+
+</body>
+</html>
